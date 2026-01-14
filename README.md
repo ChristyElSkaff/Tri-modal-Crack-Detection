@@ -24,7 +24,6 @@ The pipeline supports:
 
 ---
 
-## Workspace Setup (one terminal)
 Open a new terminal and run:
 
 ```bash
@@ -32,3 +31,35 @@ cd ~/Time/ros2_ws
 source /opt/ros/humble/setup.bash
 source ~/ros2_humble/install/setup.bash
 source install/setup.bash
+
+```
+Run the Livox driver
+
+```bash
+ros2 launch livox_ros_driver2 msg_MID360_launch.py
+```
+Run the Livox accumulator
+
+```bash
+ros2 run flir_livox_sync livox_accumulator --ros-args -p window_duration:=20.0
+```
+Run the RGB driver
+
+```bash
+ros2 run spinnaker_camera_driver camera_driver_node \
+  --ros-args \
+  -r __node:=flir_camera \
+  -p serial_number:="'25235670'" \
+  -p parameter_file:="/home/semesterproject/Time/ros2_ws/install/spinnaker_camera_driver/share/spinnaker_camera_driver/config/blackfly_s.yaml"
+  ```
+  Run the Seek node
+  
+  ```bash
+  ros2 run seek_thermal_cpp seek_thermal_node
+  ```
+  Run the synchronizer
+
+  ```bash
+  ros2 run flir_livox_sync flir_seek_livox_recorder \
+  --ros-args -p slop:=0.5 -p output_root:=/home/semesterproject/ros2_data
+  ```
