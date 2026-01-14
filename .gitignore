@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# ROS2 / build artifacts
+build/
+install/
+log/
+
+# Data / outputs
+data/
+datasets/
+*.bag
+*.pcd
+*.ply
+*.mp4
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
